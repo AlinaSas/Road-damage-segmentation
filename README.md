@@ -130,6 +130,10 @@
  
 Использование ансамбля взятием среднего по предсказаниям сетей
 показывает лучшие результаты.
+ <p>
+
+</p>
+ Значения метрик
  </p>
 
 <table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 2>
@@ -181,7 +185,10 @@
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss_unet_defect.png" height="260" width="800" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet_defect.png" height="260" width="800" title="dice">
 </p>
+<p>
 
+</p>
+ Значения метрик
 <table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 2>
    <tr>
     <th>Метрика</th>
