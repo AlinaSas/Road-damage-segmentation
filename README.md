@@ -67,6 +67,9 @@
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice.png" height="260" width="800" title="dice">
 </p>
 
+<p> 
+ 
+</p>
 Также была обучена нейросетьс архитектурой Unet, в качестве метода оптимизации использовался Adam.
 <p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
 
@@ -75,7 +78,15 @@
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet1.png" height="260" width="800" title="dice">
 </p>
 
+<p> 
+ 
+</p>
 В ходе настройки обеих сетей, были опробованы изменения: числа слоёв сети, количества свёрточных фильтров на них, методов оптимизации и скорости обучения, функций потерь, нормализации по мини-батчу, регуляризации прореживания, количества эпох и т.д.
+
+<p> 
+ 
+ Сравнительная таблица для двух архитектур нейросетей, обученных с разными функциями потерь:
+</p>
 
 <table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 5>
    <tr>
@@ -112,4 +123,40 @@
   </tr>
  </table>
 
+<p>
+ 
+ 
+Использование ансамбля взятием среднего по предсказаниям сетей
+показывает лучшие результаты.
+ </p>
 
+<table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 2>
+   <tr>
+    <th>Метрика</th>
+    <th>Значение</th>
+   </tr>
+   <tr>
+    <td>IoU</td>
+    <td>98.6</td>
+  </tr>
+ <tr>
+    <td>Dice index</td>
+    <td>99.3</td>
+  </tr>
+ <tr>
+    <td>Взвешенная pixel accuracy</td>
+    <td>99.2</td>
+  </tr>
+ <tr>
+    <td>Pixel accuracy</td>
+    <td>99.3</td>
+  </tr>
+  <tr>
+    <td>Precision</td>
+    <td>99.4</td>
+  </tr>
+  <tr>
+    <td>Recall</td>
+    <td>99.1</td>
+  </tr>
+ </table>
