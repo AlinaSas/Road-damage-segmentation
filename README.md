@@ -56,5 +56,41 @@
  <li>Filtres</li>
  Некоторые фильтры для преобразования изображений.
 </ul>
-  
+
+<h2>Результаты работы модели</h2>
+
+<table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 5>
+   <tr>
+    <th rowspan="2">Функция потерь/метрика</th>
+    <th colspan="2">Pixel Accuracy</th>
+    <th colspan="2">Jaccard index</th>
+   </tr>
+   <tr>
+    <td>Unet</td>
+    <td>Deeplab v3</td>
+    <td>Unet</td>
+    <td>Deeplab v3</td>
+  </tr>
+ <tr>
+    <td>Jaccard loss</td>
+    <td>98.187</td>
+    <td>98.489</td>
+    <td>96.066</td>
+    <td>97.993</td>
+  </tr>
+ <tr>
+    <td>Jaccard loss 2</td>
+    <td>98.194</td>
+    <td>98.993</td>
+    <td>96.112</td>
+    <td>98.085</td>
+  </tr>
+ <tr>
+    <td>Binary cross-entropy</td>
+    <td>98.458</td>
+    <td>98.937</td>
+    <td>96.689</td>
+    <td>98.006</td>
+  </tr>
+ </table>
 
