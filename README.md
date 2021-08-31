@@ -173,3 +173,51 @@
 </p>
  
  <h3>Сегментация повреждений дорожного покрытия</h3>
+Для сегментации повреждений дорожного покрытия была использована архитектура U-NET, с применением dropout регуляризации и нормализацией по
+мини-батчам.
+<p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
+
+<p>
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss_unet_defect.png" height="260" width="800" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet_defect.png" height="260" width="800" title="dice">
+</p>
+
+<table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 2>
+   <tr>
+    <th>Метрика</th>
+    <th>Значение</th>
+   </tr>
+   <tr>
+    <td>IoU</td>
+    <td>48.3</td>
+  </tr>
+ <tr>
+    <td>Dice index</td>
+    <td>72.3</td>
+  </tr>
+ <tr>
+    <td>Взвешенная pixel accuracy</td>
+    <td>91.1</td>
+  </tr>
+ <tr>
+    <td>Pixel accuracy</td>
+    <td>99.3</td>
+  </tr>
+  <tr>
+    <td>Precision</td>
+    <td>80.5</td>
+  </tr>
+  <tr>
+    <td>Recall</td>
+    <td>68.0</td>
+  </tr>
+ </table>
+ 
+Пример сегментации повреждений дорожного покрытия с
+использованием архитектуры U-Net на изображении из валидационного набора
+данных.
+
+<p>
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/104___video_only_img15593.png.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_segmentation.png" height="240" width="700" title="dice">
+</p>
