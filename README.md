@@ -57,7 +57,10 @@
  Некоторые фильтры для преобразования изображений.
 </ul>
 
+
 <h2>Результаты работы модели</h2>
+
+<h3>Сегментация дорожного покрытия</h3>
 
 <p>Для сегментации дороги была обучена нейросеть с архитектурой Deeplab v3 + с кодировщиком MobileNet v2, в качестве метода оптимизации использовался Adam.</p>
 <p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
@@ -74,8 +77,8 @@
 <p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
 
 <p>
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss_unet1.png" height="260" width="800" title="dice">
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet1.png" height="260" width="800" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss_unet_road.png" height="260" width="800" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet_road.png" height="260" width="800" title="dice">
 </p>
 
 <p> 
@@ -122,7 +125,6 @@
     <td>98.006</td>
   </tr>
  </table>
-
 <p>
  
  
@@ -160,3 +162,14 @@
     <td>99.1</td>
   </tr>
  </table>
+ 
+ Пример изображения,сегментации дороги на нём с помощью нейросети с архитектурой deeplab v3 + mobilenet v2 и с помощью нейросети с архитектурой unet, а также сегментация с использованием ансамблирования взвешенным этих двух архитектур (сверху вниз)
+ 
+ <p>
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/104___video_only_img15553.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/deeplab_img15553.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/unet_img15553.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/combo_img15553.png" height="240" width="700" title="dice">
+</p>
+ 
+ <h3>Сегментация повреждений дорожного покрытия</h3>
