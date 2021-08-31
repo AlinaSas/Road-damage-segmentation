@@ -59,6 +59,24 @@
 
 <h2>Результаты работы модели</h2>
 
+<p>Для сегментации дороги была обучена нейросеть с архитектурой Deeplab v3 + с кодировщиком MobileNet v2, в качестве метода оптимизации использовался Adam.</p>
+<p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
+
+<p>
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss.png" height="260" width="800" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice.png" height="260" width="800" title="dice">
+</p>
+
+Также была обучена нейросетьс архитектурой Unet, в качестве метода оптимизации использовался Adam.
+<p>На графиках прдставлено изменение функции потерь (верхний график) и индекса Дайса (нижний график) на обучающем и валидационном наборах в зависимости от эпохи.</p>
+
+<p>
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/loss_unet1.png" height="260" width="800" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/dice_unet1.png" height="260" width="800" title="dice">
+</p>
+
+В ходе настройки обеих сетей, были опробованы изменения: числа слоёв сети, количества свёрточных фильтров на них, методов оптимизации и скорости обучения, функций потерь, нормализации по мини-батчу, регуляризации прореживания, количества эпох и т.д.
+
 <table border="1" width="100%" cellpadding="5" bgcolor="black" cols = 5>
    <tr>
     <th rowspan="2">Функция потерь/метрика</th>
@@ -93,4 +111,5 @@
     <td>98.006</td>
   </tr>
  </table>
+
 
