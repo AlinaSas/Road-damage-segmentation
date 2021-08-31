@@ -13,6 +13,8 @@
 ограждений, обочин и разметки на проезжей части, наличие или отсутствие проезжающего транспорта разных габаритов, погодные условия, степень
 разрушения дорожного покрытия.
 
-![Image alt](https://github.com/Alinasas/Road-damage-segmentation/tree/master/readme_images/img11241.png)
+<p align="center">
+  <img src="https://github.com/Alinasas/Road-damage-segmentation/tree/master/readme_images/img11241.png" width="384" height="216" title="road">
+
 
 Структура проекта
