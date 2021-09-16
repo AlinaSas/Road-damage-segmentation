@@ -170,7 +170,7 @@
  Пример изображения,сегментации дороги на нём с помощью нейросети с архитектурой deeplab v3 + mobilenet v2 и с помощью нейросети с архитектурой unet, а также сегментация с использованием ансамблирования взвешенным этих двух архитектур (сверху вниз)
  
  <p>
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/104___video_only_img15553.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/img15553.png" height="240" width="700" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/deeplab_img15553.png" height="240" width="700" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/unet_img15553.png" height="240" width="700" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/combo_img15553.png" height="240" width="700" title="dice">
@@ -225,10 +225,12 @@
 данных.
 
 <p>
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/104___video_only_img15593.png.png" height="240" width="700" title="dice">
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_segmentation.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/img11241.png.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_img11241.png" height="240" width="700" title="dice">
 </p>
 
 <h2>Определения площади повреждения</h2>
 
 С помощью алгоритма было вычислено значение площали повреждений на изображении: 201.55 см
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_img11241.png" height="240" width="700" title="dice">
+
