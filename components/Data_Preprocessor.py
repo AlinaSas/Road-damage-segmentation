@@ -6,20 +6,9 @@ import matplotlib.pyplot as plt
 import albumentations as A
 from PIL import Image
 
-project_directory = '/home/alina/PycharmProjects/roads_git/'
-
-video_path = project_directory + '/video/video/video_0_00:00:16.mp4'
-save_video_cut_directory = project_directory + 'video/cut/'
-save_storyboards_directory = project_directory + 'video/storyboards/'
-image_directory = project_directory + 'data/Road_defects/PNG/FULL_SIZE/def_imgs/'
-mask_directory = project_directory + 'data/Road_defects/PNG/FULL_SIZE/def_masks/'
-save_image_directory = project_directory + 'data/Road_defects/PNG/imgs/'
-save_mask_directory = project_directory + 'data/Road_defects/PNG/masks/'
-npy_image_directory = ''
-npy_mask_directory = ''
-augmented_image_directory = project_directory + 'data/Road_defects/PNG/augmentated_imgs/'
-augmented_mask_directory = project_directory + 'data/Road_defects/PNG/augmentated_masks/'
-
+from Path import video_path, save_video_cut_directory, save_storyboards_directory, image_directory, mask_directory, \
+                 save_image_directory, save_mask_directory, npy_image_directory, npy_mask_directory, \
+                 augmented_image_directory, augmented_mask_directory
 
 class Preprocessor:
     """Класс для предварительной обработки данных для обучения.

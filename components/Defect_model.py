@@ -19,14 +19,7 @@ from Callbacks_lib import LossAccHistory
 from Data_Generator import DataGenerator
 
 
-project_directory = '/home/alina/PycharmProjects/roads_test/'
-
-'''img_path = project_directory + 'imgs/Road_defects/NPY/np_imgs/'
-mask_path = project_directory + 'imgs/Road_defects/NPY/np_masks/'
-img_val_path = project_directory + 'imgs/Road_defects/NPY/val_np_imgs/'
-mask_val_path = project_directory + 'imgs/Road_defects/NPY/val_np_masks/'
-
-model_dir = project_directory + 'model_checkpoints/defects_'''
+from Path import def_img_path, def_mask_path, def_img_val_path, def_mask_val_path, def_model_dir
 
 
 class Defect_model:
@@ -189,10 +182,10 @@ def iou(y_true, y_pred, smooth=1):
     random.shuffle(masks_val)
 
 
-imgs = [img_path + im for im in sorted(os.listdir(img_path))]
-masks = [mask_path + m for m in sorted(os.listdir(mask_path))]
-imgs_val = [img_val_path + im for im in sorted(os.listdir(img_val_path))]
-masks_val = [mask_val_path + m for m in sorted(os.listdir(mask_val_path))]
+imgs = [def_img_path + im for im in sorted(os.listdir(def_img_path))]
+masks = [def_mask_path + m for m in sorted(os.listdir(def_mask_path))]
+imgs_val = [def_img_val_path + im for im in sorted(os.listdir(def_img_val_path))]
+masks_val = [def_mask_val_path + m for m in sorted(os.listdir(def_mask_val_path))]
 
 shuffle(seed=442)
 
@@ -203,5 +196,5 @@ print(masks)
 print(imgs_val)
 print(masks_val)
 
-rm = Defect_model(imgs, masks, imgs_val, masks_val, model_dir)
+rm = Defect_model(imgs, masks, imgs_val, masks_val, def_model_dir)
 h = rm.train_model(100)'''

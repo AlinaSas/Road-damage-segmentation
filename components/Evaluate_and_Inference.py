@@ -16,38 +16,13 @@ import cv2
 import plotly.express as px
 import pandas as pd
 
-project_directory = '/home/alina/PycharmProjects/road_test/'
 
-road_image_path = project_directory + 'data/Road_surface/PNG/imgs/'
-road_mask_path = project_directory + 'data/Road_surface/PNG/masks/'
-
-# road_model1_path = project_directory + 'models/deeplab_model_jrms.93.h5'
-road_model1_path = project_directory + 'actual_model/unet_model__new_bce_07_79+23.h5'
-road_model2_path = project_directory + 'actual_model/deeplab_model_jac2_1205_61+36_0.015060926787555218.h5'
-# road_model2_path = project_directory + 'unet_model_unet2.68.h5'
-
-defect_image_path = project_directory + 'data/Road_defects/PNG/road_imgs/'
-defect_mask_path = project_directory + 'data/Road_defects/PNG/masks/'
-defect_model_path = project_directory + 'actual_model/unet_defect_model_0.493354.h5'
-
-save_predict_npy_path = project_directory + 'data/Predictions/NPY/'
-save_predict_image_path = project_directory + 'data/Predictions/IMG/'
-
-save_activation_directory = project_directory + 'act/'
-
-history_plots_directory = project_directory + 'history_plot/'
-loss_history = project_directory + 'metrics_checkpoints/continue_loss.npy'
-vloss_history = project_directory + 'metrics_checkpoints/continue_vloss.npy'
-pa_history = project_directory + 'metrics_checkpoints/continue_pa.npy'
-vpa_history = project_directory + 'metrics_checkpoints/continue_vpa.npy'
-dice_history = project_directory + 'metrics_checkpoints/continue_dice.npy'
-vdice_history = project_directory + 'metrics_checkpoints/continue_vdice.npy'
-iou_history = project_directory + 'metrics_checkpoints/continue_iou .npy'
-viou_history = project_directory + 'metrics_checkpoints/continue_viou.npy'
-prec_history = ''
-vprec_history = ''
-rec_history = ''
-vrec_history = ''
+from Path import road_image_path, road_mask_path, road_model1_path, road_model2_path, \
+                 defect_image_path, defect_mask_path, defect_model_path, \
+                 save_predict_npy_path, save_predict_image_path, save_activation_directory, \
+                 history_plots_directory, loss_history, vloss_history, pa_history, \
+                 vpa_history, dice_history, vdice_history, iou_history, viou_history, \
+                 prec_history, vprec_history, rec_history, vrec_history
 
 
 class Evaluate_and_Inference:
@@ -122,6 +97,7 @@ class Evaluate_and_Inference:
         imgs = image_paths()
         if metric:
             masks = mask_paths()
+            print(masks)
             PA, WPA, PREC, REC, DICE, IoU = {}, {}, {}, {}, {}, {}
             yt, yp = [], []
             for im, m in zip(imgs, masks):
@@ -378,11 +354,11 @@ class Evaluate_and_Inference:
 
 
 def image_paths():
-    return [defect_image_path + im for im in sorted(list(os.listdir(defect_image_path)))][35:]
+    return [defect_image_path + im for im in sorted(list(os.listdir(defect_image_path)))]
 
 
 def mask_paths():
-    return [defect_mask_path + m for m in sorted(list(os.listdir(defect_mask_path)))][35:]
+    return [defect_mask_path + m for m in sorted(list(os.listdir(defect_mask_path)))]
 
 
 image_size = (352, 1216)

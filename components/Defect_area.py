@@ -1,8 +1,7 @@
 import numpy as np
 import math
 
-
-project_directory = '/home/alina/PycharmProjects/roads/'
+from Path import image_for_defect_area_calc, image_for_proportion_calc
 
 
 class Defect_area:
@@ -177,6 +176,5 @@ class Defect_area:
         return S
 
 
-d = Defect_area(project_directory + 'imgs/Road_defects/NPY/np_masks/104___video_only_img11241.npy',
-                project_directory + 'imgs/Road_surface/NPY/val_np_masks/104___video_only_img135.npy')
+d = Defect_area(image_for_defect_area_calc, image_for_proportion_calc )
 

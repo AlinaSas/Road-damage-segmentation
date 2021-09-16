@@ -16,15 +16,7 @@ from tensorflow.python.keras import backend as K
 from Callbacks_lib import LossAccHistory
 from Data_Generator import DataGenerator
 
-project_directory = '/home/alina/PycharmProjects/roads/'
-
-img_path = project_directory + 'data/Road_surface/NPY/np_imgs/'
-mask_path = project_directory + 'data/Road_surface/NPY/np_masks/'
-img_val_path = project_directory + 'data/Road_surface/NPY/val_np_imgs/'
-mask_val_path = project_directory + 'data/Road_surface/NPY/val_np_masks/'
-
-model_dir = project_directory + 'model_checkpoints/road_'
-
+from Path import img_path, mask_path, img_val_path, mask_val_path, model_dir
 
 class UNET_model:
     """Класс для создания и обучения модели UNET для сегментации дорожного покрытия.
