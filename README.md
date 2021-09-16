@@ -228,3 +228,7 @@
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/104___video_only_img15593.png.png" height="240" width="700" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_segmentation.png" height="240" width="700" title="dice">
 </p>
+
+<h2>Определения площади повреждения</h2>
+
+С помощью алгоритма было вычислено значение площали повреждений на изображении: 201.55 см
