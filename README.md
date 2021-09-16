@@ -241,7 +241,7 @@ Precision, Recall, Dice index, Pixel Accuracy, Confusion matrix) для изоб
 данных.
 
 <p>
- <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/img11241.png.png" height="240" width="700" title="dice">
+ <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/img11241.png" height="240" width="700" title="dice">
  <img src="https://github.com/Alinasas/Road-damage-segmentation/blob/master/readme_images/defect_img11241.png" height="240" width="700" title="dice">
 </p>
 
