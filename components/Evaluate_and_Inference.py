@@ -16,22 +16,22 @@ import cv2
 import plotly.express as px
 import pandas as pd
 
-project_directory = '/home/alina/PycharmProjects/roads/'
+project_directory = '/home/alina/PycharmProjects/road_test/'
 
-road_image_path = project_directory + 'imgs/Road_surface/PNG/ValRGB2/'
-road_mask_path = project_directory + 'imgs/Road_surface/PNG/ValSeq2/'
+road_image_path = project_directory + 'data/Road_surface/PNG/imgs/'
+road_mask_path = project_directory + 'data/Road_surface/PNG/masks/'
 
 # road_model1_path = project_directory + 'models/deeplab_model_jrms.93.h5'
 road_model1_path = project_directory + 'actual_model/unet_model__new_bce_07_79+23.h5'
 road_model2_path = project_directory + 'actual_model/deeplab_model_jac2_1205_61+36_0.015060926787555218.h5'
 # road_model2_path = project_directory + 'unet_model_unet2.68.h5'
 
-defect_image_path = project_directory + 'imgs/Road_defects/defects_img/PNG/IMGS/road_imgs/'
-defect_mask_path = project_directory + 'imgs/Road_defects/defects_img/PNG/MASKS/'
+defect_image_path = project_directory + 'data/Road_defects/PNG/road_imgs/'
+defect_mask_path = project_directory + 'data/Road_defects/PNG/masks/'
 defect_model_path = project_directory + 'actual_model/unet_defect_model_0.493354.h5'
 
-save_predict_npy_path = project_directory + 'imgs/Predictions/NPY/'
-save_predict_image_path = project_directory + 'imgs/Predictions/IMG/'
+save_predict_npy_path = project_directory + 'data/Predictions/NPY/'
+save_predict_image_path = project_directory + 'data/Predictions/IMG/'
 
 save_activation_directory = project_directory + 'act/'
 
@@ -85,10 +85,10 @@ class Evaluate_and_Inference:
     """
 
     def __init__(self, model_type='road', metric=False, coefficients=[0.5, 0.5],
-                 save_image=True, save_npy=False, prediction_plot=False, global_metric=False,
+                 save_image=True, save_npy=True, prediction_plot=False, global_metric=True,
                  video=False, predicts_for_video_directory=None, video_path='',
                  get_activation=False, image_for_activations='', heatmap=True,
-                 history_plot=True):
+                 history_plot=False):
         global list_model_path
         self.save_image = save_image
         self.save_npy = save_npy
@@ -378,14 +378,14 @@ class Evaluate_and_Inference:
 
 
 def image_paths():
-    return [road_image_path + im for im in sorted(list(os.listdir(road_image_path)))][:10]
+    return [defect_image_path + im for im in sorted(list(os.listdir(defect_image_path)))][35:]
 
 
 def mask_paths():
-    return [road_mask_path + m for m in sorted(list(os.listdir(road_mask_path)))][:10]
+    return [defect_mask_path + m for m in sorted(list(os.listdir(defect_mask_path)))][35:]
 
 
 image_size = (352, 1216)
-i = Evaluate_and_Inference(model_type='road', metric=True, coefficients=[0.5, 0.5],
+i = Evaluate_and_Inference(model_type='defect', metric=True, coefficients=[1.0],
                            video=False, predicts_for_video_directory=None,
-                           video_path='/home/alina/PycharmProjects/roads/video/v1.mp4')
+                           video_path='')

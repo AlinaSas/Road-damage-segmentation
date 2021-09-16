@@ -5,7 +5,7 @@ from tensorflow.keras.utils import Sequence
 class DataGenerator(Sequence):
     """Класс для передачи изображеий нейросети небольшими батчами."""
 
-    def __init__(self, list_IDs, batch_size=6, dim=(352, 1216), n_channels=3,
+    def __init__(self, list_IDs, batch_size=1, dim=(352, 1216), n_channels=3,
                  n_classes=2, shuffle=False):
         self.dim = dim
         self.batch_size = batch_size

@@ -177,6 +177,6 @@ class Defect_area:
         return S
 
 
-d = Defect_size(project_directory + 'imgs/Road_defects/NPY/np_masks/104___video_only_img11241.npy',
+d = Defect_area(project_directory + 'imgs/Road_defects/NPY/np_masks/104___video_only_img11241.npy',
                 project_directory + 'imgs/Road_surface/NPY/val_np_masks/104___video_only_img135.npy')
 

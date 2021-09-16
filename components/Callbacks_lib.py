@@ -2,7 +2,7 @@ import keras
 import numpy as np
 
 
-project_directory = '/home/alina/PycharmProjects/roads/'
+project_directory = '/home/alina/PycharmProjects/road_test/'
 
 
 class LossAccHistory(keras.callbacks.Callback):

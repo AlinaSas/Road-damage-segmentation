@@ -18,10 +18,10 @@ from Data_Generator import DataGenerator
 
 project_directory = '/home/alina/PycharmProjects/roads/'
 
-img_path = project_directory + 'imgs/Road_surface/NPY/np_imgs/'
-mask_path = project_directory + 'imgs/Road_surface/NPY/np_masks/'
-img_val_path = project_directory + 'imgs/Road_surface/NPY/val_np_imgs/'
-mask_val_path = project_directory + 'imgs/Road_surface/NPY/val_np_masks/'
+img_path = project_directory + 'data/Road_surface/NPY/np_imgs/'
+mask_path = project_directory + 'data/Road_surface/NPY/np_masks/'
+img_val_path = project_directory + 'data/Road_surface/NPY/val_np_imgs/'
+mask_val_path = project_directory + 'data/Road_surface/NPY/val_np_masks/'
 
 model_dir = project_directory + 'model_checkpoints/road_'
 

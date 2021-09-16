@@ -19,14 +19,14 @@ from Callbacks_lib import LossAccHistory
 from Data_Generator import DataGenerator
 
 
-project_directory = '/home/alina/PycharmProjects/roads/'
+project_directory = '/home/alina/PycharmProjects/roads_test/'
 
-img_path = project_directory + 'imgs/Road_defects/NPY/np_imgs/'
+'''img_path = project_directory + 'imgs/Road_defects/NPY/np_imgs/'
 mask_path = project_directory + 'imgs/Road_defects/NPY/np_masks/'
 img_val_path = project_directory + 'imgs/Road_defects/NPY/val_np_imgs/'
 mask_val_path = project_directory + 'imgs/Road_defects/NPY/val_np_masks/'
 
-model_dir = project_directory + 'model_checkpoints/defects_'
+model_dir = project_directory + 'model_checkpoints/defects_'''
 
 
 class Defect_model:
@@ -70,7 +70,6 @@ class Defect_model:
         c2 = Conv2D(200, (3, 3), padding='same')(c2)
         c2 = BatchNormalization()(c2)
         c2 = Activation(activation='relu')(c2)
-        p2 = MaxPooling2D((2, 2))(c2)
 
         c6 = Conv2D(300, (3, 3), padding='same')(p2)
         c6 = BatchNormalization()(c6)
@@ -130,7 +129,7 @@ class Defect_model:
             loss = 'binary_crossentropy'
         elif self.loss_function == 'jaccard_loss':
             loss = self.Jaccard_loss
-        elif self.loss_function == 'jaccard_loss_2':
+        elif self.loss_function == 'jaccard_loss2':
             loss = self.Jaccard_loss2
         else:
             print('Данная функция потерь не поддерживается.\n '
@@ -143,21 +142,21 @@ class Defect_model:
                       metrics=[dice, IOU, tf.keras.metrics.BinaryAccuracy(), tf.keras.metrics.Precision(),
                                tf.keras.metrics.Recall()])
 
-    def train_model(self, epochs):
+    def train_model(self, epochs, batch_size):
         """Обучение модели.
         Данные подаются модели датагенератором. Каждую эпоху модель сохраняется в указанную дирректорию,
         в названии указывается номер эпохи и значение функции потерь.
         Также метод возвращает историю изменения метрик."""
 
-        training_generator = DataGenerator(self.image_path_list)
-        validation_generator = DataGenerator(self.image_val_path_list)
+        training_generator = DataGenerator(self.image_path_list, batch_size=batch_size)
+        validation_generator = DataGenerator(self.image_val_path_list, batch_size=batch_size)
 
         model = self.Create_Model()
         self.Compile_Model(model)
 
         history = LossAccHistory()
-        callback = [cb.ModelCheckpoint(filepath=self.model_dir + 'model_unet_df.{epoch:02d}{loss:02d}.h5',
-                                       monitor='loss', save_weights_only=False),
+        callback = [cb.ModelCheckpoint(filepath=self.model_dir + 'model_unet_df.{epoch:02d}_{loss:02f}.h5',
+                                       monitor='val_loss', save_weights_only=False),
                     history]
 
         model.fit_generator(generator=training_generator, epochs=epochs,
@@ -178,7 +177,7 @@ def iou(y_true, y_pred, smooth=1):
     return tf.reduce_mean(res)
 
 
-def shuffle(seed=400):
+'''def shuffle(seed=400):
     """Перемешивает выборку с заданным параметров random.seed"""
     random.seed(seed)
     random.shuffle(imgs)
@@ -205,4 +204,4 @@ print(imgs_val)
 print(masks_val)
 
 rm = Defect_model(imgs, masks, imgs_val, masks_val, model_dir)
-h = rm.train_model(100)
+h = rm.train_model(100)'''

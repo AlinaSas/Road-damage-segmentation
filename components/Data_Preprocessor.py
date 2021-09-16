@@ -11,21 +11,21 @@ project_directory = '/home/alina/PycharmProjects/roads_git/'
 video_path = project_directory + '/video/video/video_0_00:00:16.mp4'
 save_video_cut_directory = project_directory + 'video/cut/'
 save_storyboards_directory = project_directory + 'video/storyboards/'
-image_directory = project_directory + 'imgs/Road_defects/PNG/FULL_SIZE/def_imgs/'
-mask_directory = project_directory + 'imgs/Road_defects/PNG/FULL_SIZE/def_masks/'
-save_image_directory = project_directory + '/imgs/Road_defects/PNG/imgs/'
-save_mask_directory = project_directory + 'imgs/Road_defects/PNG/masks/'
+image_directory = project_directory + 'data/Road_defects/PNG/FULL_SIZE/def_imgs/'
+mask_directory = project_directory + 'data/Road_defects/PNG/FULL_SIZE/def_masks/'
+save_image_directory = project_directory + 'data/Road_defects/PNG/imgs/'
+save_mask_directory = project_directory + 'data/Road_defects/PNG/masks/'
 npy_image_directory = ''
 npy_mask_directory = ''
-augmented_image_directory = project_directory + 'imgs/Road_defects/PNG/augmentated_imgs/'
-augmented_mask_directory = project_directory + 'imgs/Road_defects/PNG/augmentated_masks/'
+augmented_image_directory = project_directory + 'data/Road_defects/PNG/augmentated_imgs/'
+augmented_mask_directory = project_directory + 'data/Road_defects/PNG/augmentated_masks/'
 
 
 class Preprocessor:
-    """Класс для предварительной обработке данных для обучения.
-    Предобработка происходит для видов входнх данных:
+    """Класс для предварительной обработки данных для обучения.
+    Предобработка происходит для видов следующих входных данных:
     отдельные изображения, изображения с соответствующими масками, видео.
-    На выходе получаются изображения с подходящими для модели размрами, которые могут быть сохранены в форматах .png, .npy.
+    На выходе получаются изображения с подходящими для модели размерами, которые могут быть сохранены в форматах .png, .npy.
     Входные параметры:
     data - список путей к избражениям;
     mask_data - список путей к маскам изображений (указывается только если type='image_with_mask');
@@ -49,7 +49,7 @@ class Preprocessor:
                      Используется для удаления похожих кадров. Если равен 0, то кадры не прореживаются."""
 
     def __init__(self, data, mask_data='', type='image',
-                 npy_directory=None, npy_mask_directory=None, save_directory=None, mask_save_directory=None,
+                 npy_directory=None, npy_mask_directory=None, save_directory=None, mask_save_directory=None, plot=False,
                  crop_coordinate=None, resize_params=None, object_color=None,
                  cut_videos=False, cut_params=None, save_cut_directory=None,
                  storyboards_directory=None, storyboards_prepr=False,
@@ -62,16 +62,18 @@ class Preprocessor:
         if crop_coordinate is None:
             crop_coordinate = []
         if type == 'image':
-            self.image_preprocess(data, crop_coordinate, resize_params, save_directory, npy_directory)
+            if data == []:
+                print('Дирректория с данными пустая')
+            self.image_preprocess(data, crop_coordinate, resize_params, save_directory, npy_directory, plot)
         elif type == 'image_with_mask':
             print(type)
             self.image_with_mask_preprocess(data, mask_data, crop_coordinate, resize_params,
                                             save_directory, mask_save_directory, object_color,
-                                            npy_directory, npy_mask_directory)
+                                            npy_directory, npy_mask_directory, plot)
         elif type == 'video':
             self.video_preprocess(data, cut_videos, cut_params, save_cut_directory,
                                   storyboards_directory, storyboards_prepr, thinning_coeff,
-                                  crop_coordinate, resize_params, save_directory, npy_directory)
+                                  crop_coordinate, resize_params, save_directory, npy_directory, plot)
 
     def video_preprocess(self, data, cut_videos, cut_params, save_cut_directory, storyboards_directory,
                          storyboards_prepr, thinning_coeff,
@@ -105,7 +107,7 @@ class Preprocessor:
 
     def image_with_mask_preprocess(self, data, mask_data, crop_coordinate, resize_params,
                                    save_directory, mask_save_directory, object_color,
-                                   npy_directory, npy_mask_directory):
+                                   npy_directory, npy_mask_directory, plot):
         """ Препроцессинг изображения и маски позволяет обрезать и изменять размеры(сжимать,расширять)
             изображения и маски с одинаковыми параметрами, сохранить изображение и маску в формате .png,
             а также преобразовать в np.array и сохранять в .npy.
@@ -113,11 +115,16 @@ class Preprocessor:
             """
 
         for i, image_data in enumerate(data):
-            image, image_np = self.image_open(image_data)
-            mask, mask_np = self.image_open(mask_data[i])
+            print('Начием препроцессинг для', image_data, '...')
+            image = self.image_open(image_data)
+            mask = self.image_open(mask_data[i])
 
-            dim = self.get_dim(image_np)
-            dim_mask = self.get_dim(mask_np)
+            if plot:
+                real_image = image.copy()
+                real_mask = mask.copy()
+
+            dim = self.get_dim(image)
+            dim_mask = self.get_dim(mask)
 
             if dim == dim_mask:
                 if crop_coordinate:
@@ -142,19 +149,25 @@ class Preprocessor:
                 self.image_save(mask_save_directory, mask, m_name)
                 print('Изображение и маска сохранены в формате .npy')
 
-            if npy_directory:
+            if npy_directory and npy_mask_directory:
                 print('Происходит сохранение изображения и маски в .npy')
                 np.save(npy_directory + im_name + '.npy', image)
-                self.save_mask_in_npy(mask, npy_mask_directory + m_name, object_color, dim_mask)
+                self.save_mask_in_npy(mask, npy_mask_directory, m_name, object_color, dim_mask)
                 print('Изображение и маска сохранены в формате .npy')
 
-    def image_preprocess(self, image_path_list, crop_coordinate, resize_params, save_directory, npy_directory):
+            if plot:
+                self.preprocess_plots_image_with_mask(real_image, image, real_mask, mask)
+
+    def image_preprocess(self, image_path_list, crop_coordinate, resize_params, save_directory, npy_directory, plot):
         """Препроцессинг изображения позволяет обрезать изображение, измененить размеры,
         сохранить изображение в формате .png, а также преобразовать в np.array и сохранить в .npy"""
 
         for image_path in image_path_list:
-            image, image_np = self.image_open(image_path)
-            dim = self.get_dim(image_np)
+            image = self.image_open(image_path)
+            dim = self.get_dim(image)
+
+            if plot:
+                real_image = image.copy()
 
             if crop_coordinate:
                 crop = self.make_crop(crop_coordinate, dim, image)
@@ -173,11 +186,17 @@ class Preprocessor:
                 print('Происходит сохранение изображения в .npy')
                 np.save(npy_directory + image_name + '.npy', image)
                 print('Изображение сохранено в формате .npy')
+            if plot:
+                print('Строится график')
+                self.preprocess_plots(real_image, image)
 
     def make_crop(self, crop_coordinate, dim, *data):
         x, y = crop_coordinate[2] - crop_coordinate[0], crop_coordinate[3] - crop_coordinate[1]
+
         if dim[1] <= x and dim[0] <= y:
             print('Обрезка невозможна, так как исходные параметры изображения или маски меньше заданных')
+            for elem in data:
+                yield elem
         elif dim[1] > x and dim[0] <= y:
             print('Обрезка возможна только по ширине')
             for elem in data:
@@ -203,11 +222,13 @@ class Preprocessor:
                 yield self.resize(elem, resize_params)
 
     @staticmethod
-    def image_save(dir, img, img_name):
-        img.save(dir + img_name + '.png', "PNG")
+    def image_save(diretory, img, img_name):
+        if not os.path.exists(diretory):
+            os.mkdir(diretory)
+        img.save(diretory + img_name + '.png', "PNG")
 
     @staticmethod
-    def save_mask_in_npy(M, m_name, object_color, dim_mask):
+    def save_mask_in_npy(M, npy_mask_directory, m_name, object_color, dim_mask):
         """Сохраняет маску в бинарном виде, где 1 - пиксель интересующего объекта (дорога или треина), 0 - фон"""
 
         M = np.array(M)
@@ -221,7 +242,10 @@ class Preprocessor:
                     MR[i][j] = 1
                 else:
                     MR[i][j] = 0
-        np.save(m_name + '.npy', MR)
+
+        if not os.path.exists(npy_mask_directory):
+            os.mkdir(npy_mask_directory)
+        np.save(npy_mask_directory + m_name + '.npy', MR)
 
     @staticmethod
     def create_storyboards(video, storyboards_directory):
@@ -242,13 +266,12 @@ class Preprocessor:
 
     @staticmethod
     def get_dim(img):
-        return [np.shape(img)[0], np.shape(img)[1]]
+        return [img.size[1], img.size[0]]
 
     @staticmethod
     def image_open(img):
         image = Image.open(img)
-        image_np = np.array(image).astype('float32')
-        return image, image_np
+        return image
 
     @staticmethod
     def crop_image(image, x0, y0, x, y):
@@ -257,6 +280,28 @@ class Preprocessor:
     @staticmethod
     def resize(img, resize_params):
         return img.resize((resize_params[1], resize_params[0]), 0)
+
+    @staticmethod
+    def preprocess_plots(real_image, preprocess_image):
+        fig, ax = plt.subplots(nrows=1, ncols=2)
+        ax[0].imshow(real_image)
+        ax[0].set_title('real_image')
+        ax[1].imshow(preprocess_image)
+        ax[1].set_title('preprocess_image')
+        plt.show()
+
+    @staticmethod
+    def preprocess_plots_image_with_mask(real_image, preprocess_image, real_mask, preprocess_mask):
+        fig, ax = plt.subplots(nrows=2, ncols=2)
+        ax[0][0].imshow(real_image)
+        ax[0][0].set_title('real_image')
+        ax[0][1].imshow(preprocess_image)
+        ax[0][1].set_title('preprocess_image')
+        ax[1][0].imshow(real_mask)
+        ax[1][0].set_title('real_mask')
+        ax[1][1].imshow(preprocess_mask)
+        ax[1][1].set_title('preprocess_mask')
+        plt.show()
 
 
 class Augmentation:
@@ -327,7 +372,7 @@ class Augmentation:
         return im_new, m_new
 
 
-imgs = [image_directory + im
+'''imgs = [image_directory + im
         for im in sorted(os.listdir(image_directory))]
 
 masks = [mask_directory + m
@@ -337,7 +382,7 @@ prepr = Preprocessor(data=imgs, mask_data=masks, type='image',
                      crop_coordinate=[0, 1100, 3840, 2160], resize_params=[352, 1216],
                      save_directory=None,
                      mask_save_directory=None)
-
+'''
 '''Aug = Augmentation(images=imgs,
                    masks=masks,
                    aug_image_directory=augmented_image_directory,
